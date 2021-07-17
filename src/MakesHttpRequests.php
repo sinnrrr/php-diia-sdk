@@ -22,6 +22,7 @@ trait MakesHttpRequests
     /**
      * @param string $uri
      * @return array|string
+     * @throws GuzzleException
      */
     public function get(string $uri): array|string
     {
@@ -32,6 +33,7 @@ trait MakesHttpRequests
      * @param string $uri
      * @param array $payload
      * @return array|string
+     * @throws GuzzleException
      */
     public function post(string $uri, array $payload = []): array|string
     {
@@ -42,6 +44,7 @@ trait MakesHttpRequests
      * @param string $uri
      * @param array $payload
      * @return array|string
+     * @throws GuzzleException
      */
     public function put(string $uri, array $payload = []): array|string
     {
@@ -51,6 +54,7 @@ trait MakesHttpRequests
     /**
      * @param string $uri
      * @return string
+     * @throws GuzzleException
      */
     public function delete(string $uri): string
     {
@@ -64,6 +68,7 @@ trait MakesHttpRequests
      * @param string $uri
      * @param array $payload
      * @return array|string
+     * @throws GuzzleException
      */
     protected function request(string $method, string $uri, array $payload = []): array|string
     {
@@ -74,6 +79,7 @@ trait MakesHttpRequests
 
             return json_decode($responseBody, true) ?: $responseBody;
         } catch (GuzzleException $exception) {
+            throw $exception;
             // TODO: exceptions
             // TODO: if one of the tokens missing - auto get it
         }
