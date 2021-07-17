@@ -17,16 +17,16 @@ class Diia
     /**
      * The acquirer token, which you can get from the employee of 'Diia' service.
      *
-     * @var string
+     * @var string|null
      */
-    protected string $acquirerToken;
+    protected ?string $acquirerToken;
 
     /**
      * The session token, which you can get by authorizing with acquirer token.
      *
-     * @var string
+     * @var string|null
      */
-    protected string $sessionToken;
+    protected ?string $sessionToken;
 
     /**
      * Diia constructor.
@@ -37,10 +37,10 @@ class Diia
     {
         $this->acquirerToken = $acquirerToken;
 
-        // Obtain session token, using acquirer token
+        // Obtain session token, using acquirer token.
         $this->sessionToken = $this->obtainSessionToken($this->acquirerToken);
 
-        // If there were no guzzle instance provided, make the default one
+        // If there were no guzzle instance provided, make the default one.
         if (is_null($guzzle)) {
             $this->guzzle = new HttpClient([
                 'base_uri' => 'https://api2.diia.gov.ua/api/v1/',
