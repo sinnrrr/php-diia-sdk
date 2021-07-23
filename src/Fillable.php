@@ -2,6 +2,10 @@
 
 namespace Sinnrrr\Diia;
 
+/**
+ * Trait Fillable
+ * @package Sinnrrr\Diia
+ */
 trait Fillable {
     /**
      * The resource attributes.
@@ -42,5 +46,20 @@ trait Fillable {
         }
 
         return str_replace(' ', '', implode(' ', $parts));
+    }
+
+    /**
+     * Transform the items of the collection to the given class.
+     *
+     * @param array $collection
+     * @param $class
+     * @param array $extraData
+     * @return array
+     */
+    protected function transformCollection(array $collection, $class, array $extraData = []): array
+    {
+        return array_map(function ($data) use ($class, $extraData) {
+            return new $class($data + $extraData, $this->diia);
+        }, $collection);
     }
 }

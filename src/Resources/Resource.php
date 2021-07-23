@@ -5,6 +5,10 @@ namespace Sinnrrr\Diia\Resources;
 use Sinnrrr\Diia\Diia;
 use Sinnrrr\Diia\Fillable;
 
+/**
+ * Class Resource
+ * @package Sinnrrr\Diia\Resources
+ */
 class Resource
 {
     use Fillable;
@@ -29,20 +33,5 @@ class Resource
         $this->diia = $diia;
 
         $this->fill();
-    }
-
-    /**
-     * Transform the items of the collection to the given class.
-     *
-     * @param array $collection
-     * @param $class
-     * @param array $extraData
-     * @return array
-     */
-    protected function transformCollection(array $collection, $class, array $extraData = []): array
-    {
-        return array_map(function ($data) use ($class, $extraData) {
-            return new $class($data + $extraData, $this->diia);
-        }, $collection);
     }
 }

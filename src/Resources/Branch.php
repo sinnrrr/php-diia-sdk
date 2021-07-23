@@ -3,10 +3,10 @@
 namespace Sinnrrr\Diia\Resources;
 
 /**
- * Class Acquirer
+ * Class Branch
  * @package Sinnrrr\Diia\Resources
  */
-class Acquirer extends Resource
+class Branch extends Resource
 {
     /**
      * @var string

@@ -27,9 +27,21 @@
             "Sinnrrr\\Diia\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Sinnrrr\\Diia\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
+    },
     "config": {
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require-dev": {
+        "mockery/mockery": "^1.4",
+        "phpunit/phpunit": "^9.5"
+    }
 }
