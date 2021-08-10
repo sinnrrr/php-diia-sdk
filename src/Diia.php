@@ -34,23 +34,24 @@ class Diia
     /**
      * The session token, which you can get by authorizing with acquirer token.
      *
-     * @var string
+     * @var string|null
      */
-    protected string $sessionToken;
+    protected ?string $sessionToken;
 
     /**
      * Diia constructor.
+     * @param bool $testMode
      * @param string $acquirerToken
      * @param HttpClient|null $guzzle
      */
-    public function __construct(string $acquirerToken, HttpClient $guzzle = null)
+    public function __construct(bool $testMode, string $acquirerToken, HttpClient $guzzle = null)
     {
         $this->acquirerToken = $acquirerToken;
 
         // If there were no guzzle instance provided, make the default one.
         if (is_null($guzzle)) {
             $this->guzzle = new HttpClient([
-                'base_uri' => 'https://api2.diia.gov.ua/api/',
+                'base_uri' => "https://api2" . $testMode ? 's' : null . ".diia.gov.ua/api/",
                 'http_errors' => false,
                 'headers' => [
                     'Accept' => 'application/json',
