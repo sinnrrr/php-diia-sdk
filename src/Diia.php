@@ -17,14 +17,6 @@ class Diia
         Actions\ManagesServiceRequests;
 
     /**
-     * Guzzle instance for making HTTP requests
-     * made public to allow developer to set it's own one.
-     *
-     * @var HttpClient
-     */
-    public HttpClient $guzzle;
-
-    /**
      * The acquirer token, which you can get from the employee of 'Diia' service.
      *
      * @var string
@@ -40,25 +32,16 @@ class Diia
 
     /**
      * Diia constructor.
-     * @param bool $testMode
      * @param string $acquirerToken
      * @param HttpClient|null $guzzle
      */
-    public function __construct(bool $testMode, string $acquirerToken, HttpClient $guzzle = null)
+    public function __construct(string $acquirerToken, HttpClient $guzzle = null)
     {
         $this->acquirerToken = $acquirerToken;
 
         // If there were no guzzle instance provided, make the default one.
-        if (is_null($guzzle)) {
-            $this->guzzle = new HttpClient([
-                'base_uri' => "https://api2" . $testMode ? 's' : null . ".diia.gov.ua/api/",
-                'http_errors' => false,
-                'headers' => [
-                    'Accept' => 'application/json',
-                    'Content-Type' => 'application/json',
-                ]
-            ]);
-        } else $this->guzzle = $guzzle;
+        if (is_null($guzzle)) $this->guzzle = $this->getGuzzleProductionInstance();
+        else $this->guzzle = $guzzle;
 
         $this->sessionToken = $this->obtainSessionToken($this->acquirerToken);
     }
