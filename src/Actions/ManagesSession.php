@@ -13,6 +13,13 @@ trait ManagesSession
     use MakesHttpRequests;
 
     /**
+     * The session token, which you can get by authorizing with acquirer token.
+     *
+     * @var string|null
+     */
+    protected ?string $sessionToken;
+
+    /**
      * Obtain session token, using provided acquirer token/
      *
      * @param string $acquirerToken
@@ -20,6 +27,9 @@ trait ManagesSession
      */
     public function obtainSessionToken(string $acquirerToken): string
     {
-        return $this->get("v1/auth/acquirer/" . $acquirerToken)["token"];
+        $sessionToken = $this->get("v1/auth/acquirer/" . $acquirerToken)["token"];
+        $this->guzzle->setDefaultOption('headers/Authorization', "Bearer {$sessionToken}");
+
+        return $sessionToken;
     }
 }
