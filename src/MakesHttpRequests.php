@@ -68,7 +68,7 @@ trait MakesHttpRequests
     protected function request(string $method, string $uri, array $payload = []): array|string
     {
         try {
-            $response = $this->guzzle->request($method, $uri, $payload);
+            $response = $this->guzzle->createRequest($method, $uri, $payload);
             $responseBody = (string)$response->getBody();
 
             return json_decode($responseBody, true) ?: $responseBody;
