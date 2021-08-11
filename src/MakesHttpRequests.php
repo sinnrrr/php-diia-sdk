@@ -4,6 +4,7 @@ namespace Sinnrrr\Diia;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\TransferStats;
 
 /**
  * Trait MakesHttpRequests
@@ -106,9 +107,9 @@ trait MakesHttpRequests
 
     /**
      * @param string $uri
-     * @return array|string
+     * @return array
      */
-    public function get(string $uri): array|string
+    public function get(string $uri): array
     {
         return $this->request('GET', $uri);
     }
@@ -116,9 +117,9 @@ trait MakesHttpRequests
     /**
      * @param string $uri
      * @param array $payload
-     * @return array|string
+     * @return array
      */
-    public function post(string $uri, array $payload = []): array|string
+    public function post(string $uri, array $payload = []): array
     {
         return $this->request('POST', $uri, $payload);
     }
@@ -126,9 +127,9 @@ trait MakesHttpRequests
     /**
      * @param string $uri
      * @param array $payload
-     * @return array|string
+     * @return array
      */
-    public function put(string $uri, array $payload = []): array|string
+    public function put(string $uri, array $payload = []): array
     {
         return $this->request('PUT', $uri, $payload);
     }
@@ -148,15 +149,17 @@ trait MakesHttpRequests
      * @param string $method
      * @param string $uri
      * @param array $payload
-     * @return array|string
+     * @return array
      */
-    protected function request(string $method, string $uri, array $payload = []): array|string
+    protected function request(string $method, string $uri, array $payload = []): array
     {
         try {
-            $response = $this->guzzle->request($method, $uri, $payload);
-            $responseBody = (string)$response->getBody();
+            $response = $this->guzzle->request($method, $uri, array_merge($payload, ['on_stats' => function (TransferStats $stats) use (&$url) {
+                $url = $stats->getEffectiveUri();
+            }]));
+            $responseBody = $response->getBody()->getContents();
 
-            return json_decode($responseBody, true) ?: $responseBody;
+            return json_decode($responseBody, true);
         } catch (GuzzleException $exception) {
             printf($exception);
             // TODO: exceptions
