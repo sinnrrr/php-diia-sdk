@@ -4,7 +4,6 @@ namespace Sinnrrr\Diia;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\TransferStats;
 
 /**
  * Trait MakesHttpRequests
@@ -121,6 +120,9 @@ trait MakesHttpRequests
      */
     public function post(string $uri, array $payload = []): array
     {
+        var_dump($payload);
+        die();
+
         return $this->request('POST', $uri, $payload);
     }
 
@@ -136,9 +138,9 @@ trait MakesHttpRequests
 
     /**
      * @param string $uri
-     * @return string
+     * @return array
      */
-    public function delete(string $uri): string
+    public function delete(string $uri): array
     {
         return $this->request('DELETE', $uri);
     }
