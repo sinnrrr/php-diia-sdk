@@ -14,7 +14,8 @@ class Diia
         Actions\ManagesSessions,
         Actions\ManagesBranches,
         Actions\ManagesOffers,
-        Actions\ManagesServiceRequests;
+        Actions\ManagesServiceRequests,
+        Actions\ManagesDocumentsValidation;
 
     /**
      * The acquirer token, which you can get from the employee of 'Diia' service.
