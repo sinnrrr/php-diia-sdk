@@ -155,17 +155,10 @@ trait MakesHttpRequests
      */
     protected function request(string $method, string $uri, array $payload = []): array
     {
-        $stack = HandlerStack::create();
-// my middleware
-        $stack->push(Middleware::mapRequest(function (RequestInterface $request) {
-            $contentsRequest = (string) $request->getBody();
-            var_dump(json_decode($contentsRequest));
-
-            return $request;
-        }));
+        var_dump($payload);
 
         try {
-            return json_decode($this->guzzle->request($method, $uri, array_merge($payload, ['handler' => $stack]))->getBody(), true);
+            return json_decode($this->guzzle->request($method, $uri, $payload)->getBody(), true);
         } catch (GuzzleException $exception) {
             printf($exception);
             // TODO: exceptions
