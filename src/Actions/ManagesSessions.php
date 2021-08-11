@@ -5,10 +5,10 @@ namespace Sinnrrr\Diia\Actions;
 use Sinnrrr\Diia\MakesHttpRequests;
 
 /**
- * Trait ManagesSession
+ * Trait ManagesSessions
  * @package Sinnrrr\Diia\Actions
  */
-trait ManagesSession
+trait ManagesSessions
 {
     use MakesHttpRequests;
 
@@ -27,7 +27,8 @@ trait ManagesSession
      */
     public function obtainSessionToken(string $acquirerToken): string
     {
-        $sessionToken = $this->get("v1/auth/acquirer/" . $acquirerToken)["token"];
+        print($acquirerToken);
+        $sessionToken = $this->get("v1/auth/acquirer/{$acquirerToken}")["token"];
         $this->applyDefaultOptions(['headers' => ['Authorization' => "Bearer {$sessionToken}"]]);
 
         return $sessionToken;

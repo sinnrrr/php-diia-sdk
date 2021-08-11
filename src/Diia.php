@@ -11,7 +11,7 @@ use GuzzleHttp\Client as HttpClient;
 class Diia
 {
     use MakesHttpRequests,
-        Actions\ManagesSession,
+        Actions\ManagesSessions,
         Actions\ManagesBranches,
         Actions\ManagesOffers,
         Actions\ManagesServiceRequests;
