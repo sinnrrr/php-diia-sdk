@@ -154,9 +154,7 @@ trait MakesHttpRequests
     protected function request(string $method, string $uri, array $payload = []): array
     {
         try {
-            $response = $this->guzzle->request($method, $uri, array_merge($payload, ['on_stats' => function (TransferStats $stats) use (&$url) {
-                var_dump($stats->getEffectiveUri());
-            }]));
+            $response = $this->guzzle->request($method, $uri, $payload);
             $responseBody = $response->getBody()->getContents();
 
             return json_decode($responseBody, true);
