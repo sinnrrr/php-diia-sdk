@@ -27,9 +27,9 @@ trait ManagesSessions
      */
     public function obtainSessionToken(string $acquirerToken): string
     {
+        var_dump($this->get("v1/auth/acquirer/{$acquirerToken}"));
         $sessionToken = $this->get("v1/auth/acquirer/{$acquirerToken}")["token"];
         $this->applyDefaultOptions(['headers' => ['Authorization' => "Bearer {$sessionToken}"]]);
-        print($sessionToken);
 
         return $sessionToken;
     }
