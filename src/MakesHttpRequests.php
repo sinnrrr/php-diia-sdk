@@ -123,7 +123,7 @@ trait MakesHttpRequests
      */
     public function post(string $uri, array $payload = []): array
     {
-        return $this->request('POST', $uri, $payload);
+        return $this->request('POST', $uri, ['body' => $payload]);
     }
 
     /**
@@ -133,7 +133,7 @@ trait MakesHttpRequests
      */
     public function put(string $uri, array $payload = []): array
     {
-        return $this->request('PUT', $uri, $payload);
+        return $this->request('PUT', $uri, ['body' => $payload]);
     }
 
     /**
@@ -155,8 +155,6 @@ trait MakesHttpRequests
      */
     protected function request(string $method, string $uri, array $payload = []): array
     {
-        var_dump((string)$this->guzzle->request($method, $uri, $payload)->getBody());
-
         try {
             return json_decode((string)$this->guzzle->request($method, $uri, $payload)->getBody(), true);
         } catch (GuzzleException $exception) {
