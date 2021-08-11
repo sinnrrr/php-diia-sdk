@@ -155,10 +155,10 @@ trait MakesHttpRequests
      */
     protected function request(string $method, string $uri, array $payload = []): array
     {
-        var_dump($payload);
+        var_dump((string)$this->guzzle->request($method, $uri, $payload)->getBody());
 
         try {
-            return json_decode($this->guzzle->request($method, $uri, $payload)->getBody(), true);
+            return json_decode((string)$this->guzzle->request($method, $uri, $payload)->getBody(), true);
         } catch (GuzzleException $exception) {
             printf($exception);
             // TODO: exceptions
