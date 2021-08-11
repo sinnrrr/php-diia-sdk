@@ -18,7 +18,6 @@ trait ManagesBranches
      */
     public function createBranch(array $data): Branch
     {
-        var_dump($this->post("v2/acquirers/branch", $data));
         return new Branch(
             array_merge(
                 $data,
