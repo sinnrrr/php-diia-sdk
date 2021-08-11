@@ -123,7 +123,7 @@ trait MakesHttpRequests
      */
     public function post(string $uri, array $payload = []): array
     {
-        return $this->request('POST', $uri, ['body' => $payload]);
+        return $this->request('POST', $uri, ['json' => $payload]);
     }
 
     /**
@@ -133,7 +133,7 @@ trait MakesHttpRequests
      */
     public function put(string $uri, array $payload = []): array
     {
-        return $this->request('PUT', $uri, ['body' => $payload]);
+        return $this->request('PUT', $uri, ['json' => $payload]);
     }
 
     /**
