@@ -21,7 +21,7 @@ trait ManagesBranches
         // [ '_id' => ... ]
         $_id = $this->post("v2/acquirers/branch", $data);
 
-        return new Branch($data + $_id);
+        return new Branch(array_merge($data, $_id));
     }
 
     /**
@@ -60,9 +60,7 @@ trait ManagesBranches
         // [ '_id' => ... ]
         $_id = $this->put("v2/acquirers/branch/{$branchId}", $data);
 
-        return new Branch(
-            $data + $_id
-        );
+        return new Branch(array_merge($data, $_id));
     }
 
     /**

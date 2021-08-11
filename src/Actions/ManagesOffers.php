@@ -22,9 +22,7 @@ trait ManagesOffers
         // [ '_id' => ... ]
         $_id = $this->post("v1/acquirers/branch/{$branchId}/offer");
 
-        return new Offer(
-            $data + $_id
-        );
+        return new Offer(array_merge($data, $_id));
     }
 
     /**
