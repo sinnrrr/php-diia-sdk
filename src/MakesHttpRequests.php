@@ -155,7 +155,7 @@ trait MakesHttpRequests
     {
         try {
             $response = $this->guzzle->request($method, $uri, array_merge($payload, ['on_stats' => function (TransferStats $stats) use (&$url) {
-                $url = $stats->getEffectiveUri();
+                var_dump($stats->getEffectiveUri());
             }]));
             $responseBody = $response->getBody()->getContents();
 
