@@ -159,7 +159,7 @@ trait MakesHttpRequests
 // my middleware
         $stack->push(Middleware::mapRequest(function (RequestInterface $request) {
             $contentsRequest = (string) $request->getBody();
-            var_dump($contentsRequest);
+            var_dump(json_decode($contentsRequest));
 
             return $request;
         }));
