@@ -11,7 +11,7 @@ class Offer extends Resource
     /**
      * @var string
      */
-    public string $_id;
+    public string $id;
 
     /**
      * @var string

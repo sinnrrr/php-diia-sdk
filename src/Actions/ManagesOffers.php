@@ -19,10 +19,9 @@ trait ManagesOffers
      */
     public function createOffer(string $branchId, array $data): Offer
     {
-        // [ '_id' => ... ]
-        $_id = $this->post("v1/acquirers/branch/{$branchId}/offer");
+        $id = $this->post("v1/acquirers/branch/{$branchId}/offer");
 
-        return new Offer($data + $_id);
+        return new Offer($data + ['id' => $id]);
     }
 
     /**

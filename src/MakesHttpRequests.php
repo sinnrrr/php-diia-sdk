@@ -4,9 +4,6 @@ namespace Sinnrrr\Diia;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
-use Psr\Http\Message\RequestInterface;
 
 /**
  * Trait MakesHttpRequests
