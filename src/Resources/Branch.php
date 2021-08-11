@@ -59,9 +59,9 @@ class Branch extends Resource
     public string $house;
 
     /**
-     * @var Scope
+     * @var array
      */
-    public Scope $scopes;
+    public array $scopes;
 
     /**
      * @var string

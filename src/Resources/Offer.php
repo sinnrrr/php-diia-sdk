@@ -24,7 +24,7 @@ class Offer extends Resource
     public ?string $returnLink;
 
     /**
-     * @var Scope
+     * @var array
      */
-    public Scope $scopes;
+    public array $scopes;
 }
