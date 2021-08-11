@@ -12,6 +12,100 @@ use GuzzleHttp\Exception\GuzzleException;
 trait MakesHttpRequests
 {
     /**
+     * Guzzle default options config array.
+     *
+     * @var array
+     */
+    private array $guzzleDefaultOptions = [
+        'http_errors' => false,
+        'headers' => [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+        ]
+    ];
+
+    /**
+     * Guzzle current options config array.
+     *
+     * @var array
+     */
+    private array $guzzleCurrentOptions;
+
+    /**
+     * Diia URI for testing purposes.
+     *
+     * @var string
+     */
+    private string $diiaTestingUrl = "https://api2s.diia.gov.ua/";
+
+    /**
+     * Diia URI for production use.
+     *
+     * @var string
+     */
+    private string $diiaProductionUrl = "https://api2.diia.gov.ua/";
+
+
+    /**
+     * Parameter, which defines class actions mode.
+     *
+     * @var bool
+     */
+    private bool $testingMode = false;
+
+    /**
+     * A method, which sets the testing mode to be true.
+     *
+     * @return void
+     */
+    public function setTestingMode(): void
+    {
+        $this->testingMode = true;
+        $this->guzzleCurrentOptions = array_merge(
+            $this->guzzleDefaultOptions,
+            ['base_uri' => $this->diiaTestingUrl]
+        );
+
+        $this->guzzle = new HttpClient($this->guzzleCurrentOptions);
+    }
+
+    /**
+     * A method, which sets the testing mode to be false.
+     *
+     * @return void
+     */
+    public function setProductionMode(): void
+    {
+        $this->testingMode = false;
+        $this->guzzleCurrentOptions = array_merge(
+            $this->guzzleDefaultOptions,
+            ['base_uri' => $this->diiaProductionUrl]
+        );
+
+        $this->guzzle = new HttpClient($this->guzzleCurrentOptions);
+    }
+
+    private function setDefaultHeaders(array $headers): void
+    {
+        $this->guzzleCurrentOptions = array_merge(
+            $this->guzzleCurrentOptions,
+            ['headers' => $headers]
+        );
+
+        $this->guzzle = new HttpClient($this->guzzleCurrentOptions);
+    }
+
+    /**
+     * A method, which returns current mode.
+     *
+     * @return string
+     */
+    public function getMode(): string
+    {
+        return $this->testingMode ? 'testing' : 'production';
+    }
+
+    /**
      * Guzzle instance for making HTTP requests
      * made public to allow developer to set it's own one.
      *
