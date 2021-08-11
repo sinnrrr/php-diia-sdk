@@ -20,11 +20,8 @@ trait ManagesServiceRequests
         return $this->post("v2/acquirers/branch/{$branchId}/offer-request/dynamic", $data)['deeplink'];
     }
 
-    public function documentValidation(array $data): array
+    public function documentValidation(array $data): bool
     {
-        return $this->post(
-            'v1/acquirers/document-identification',
-            array_merge(['branchId' => $this->branchId], $data)
-        );
+        return $this->post('v1/acquirers/document-identification', $data)['success'];
     }
 }

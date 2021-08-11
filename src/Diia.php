@@ -99,9 +99,10 @@ class Diia
                     'Content-Type' => 'application/json',
                 ]
             ]);
+
+            $this->testingMode ? $this->setTestingMode() : $this->setProductionMode();
         } else $this->guzzle = $guzzle;
 
-        $this->setProductionMode();
         $this->sessionToken = $this->obtainSessionToken($this->acquirerToken);
     }
 

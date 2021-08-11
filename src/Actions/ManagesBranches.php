@@ -11,13 +11,6 @@ use Sinnrrr\Diia\Resources\Branch;
 trait ManagesBranches
 {
     /**
-     * The branch id, which will be used during service requests.
-     *
-     * @var string|null
-     */
-    protected ?string $branchId;
-
-    /**
      * Create a new branch.
      *
      * @param array $data
@@ -27,7 +20,6 @@ trait ManagesBranches
     {
         // [ '_id' => ... ]
         $_id = $this->post("v2/acquirers/branch", $data);
-        $this->branchId = $_id;
 
         return new Branch($data + $_id);
     }
@@ -67,7 +59,6 @@ trait ManagesBranches
     {
         // [ '_id' => ... ]
         $_id = $this->put("v2/acquirers/branch/{$branchId}", $data);
-        $this->branchId = $_id;
 
         return new Branch(
             $data + $_id
@@ -82,6 +73,5 @@ trait ManagesBranches
     public function deleteBranch(string $branchId): void
     {
         $this->delete("v2/acquirers/branch/{$branchId}");
-        $this->branchId = null;
     }
 }

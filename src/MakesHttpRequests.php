@@ -3,7 +3,7 @@
 namespace Sinnrrr\Diia;
 
 use GuzzleHttp\Client as HttpClient;
-use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Trait MakesHttpRequests
@@ -23,7 +23,7 @@ trait MakesHttpRequests
      * @param string $uri
      * @return array|string
      */
-    public function get(string $uri): array|string
+    public function get(string $uri): array
     {
         return $this->request('GET', $uri);
     }
@@ -33,7 +33,7 @@ trait MakesHttpRequests
      * @param array $payload
      * @return array|string
      */
-    public function post(string $uri, array $payload = []): array|string
+    public function post(string $uri, array $payload = []): array
     {
         return $this->request('POST', $uri, $payload);
     }
@@ -43,7 +43,7 @@ trait MakesHttpRequests
      * @param array $payload
      * @return array|string
      */
-    public function put(string $uri, array $payload = []): array|string
+    public function put(string $uri, array $payload = []): array
     {
         return $this->request('PUT', $uri, $payload);
     }
@@ -65,14 +65,14 @@ trait MakesHttpRequests
      * @param array $payload
      * @return array|string
      */
-    protected function request(string $method, string $uri, array $payload = []): array|string
+    protected function request(string $method, string $uri, array $payload = []): array
     {
         try {
-            $response = $this->guzzle->createRequest($method, $uri, $payload);
+            $response = $this->guzzle->request($method, $uri, $payload);
             $responseBody = (string)$response->getBody();
 
             return json_decode($responseBody, true) ?: $responseBody;
-        } catch (RequestException $exception) {
+        } catch (GuzzleException $exception) {
             printf($exception);
             // TODO: exceptions
             // TODO: if one of the tokens missing - auto get it
