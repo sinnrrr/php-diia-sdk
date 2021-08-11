@@ -68,6 +68,23 @@ trait MakesHttpRequests
     }
 
     /**
+     * Parameter, which defines class actions mode.
+     *
+     * @var bool
+     */
+    private bool $testingMode = false;
+
+    /**
+     * A method, which returns current mode.
+     *
+     * @return string
+     */
+    public function getMode(): string
+    {
+        return $this->testingMode ? 'testing' : 'production';
+    }
+
+    /**
      * A method, which sets the testing mode to be true.
      *
      * @return void

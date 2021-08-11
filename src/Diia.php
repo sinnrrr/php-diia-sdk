@@ -34,8 +34,6 @@ class Diia
 
         // If there were no guzzle instance provided, make the default one.
         if (is_null($guzzle)) {
-            $this->guzzle = new HttpClient();
-
             $this->testingMode ? $this->setTestingMode() : $this->setProductionMode();
         } else $this->guzzle = $guzzle;
 
