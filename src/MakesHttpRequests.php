@@ -45,14 +45,14 @@ trait MakesHttpRequests
      *
      * @var string
      */
-    private string $diiaTestingUrl = "https://api2s.diia.gov.ua/";
+    private string $diiaTestingUrl = "https://api2s.diia.gov.ua/api/";
 
     /**
      * Diia URI for production use.
      *
      * @var string
      */
-    private string $diiaProductionUrl = "https://api2.diia.gov.ua/";
+    private string $diiaProductionUrl = "https://api2.diia.gov.ua/api/";
 
     /**
      * Method, which sets default options for guzzle client

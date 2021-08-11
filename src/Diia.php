@@ -26,11 +26,13 @@ class Diia
     /**
      * Diia constructor.
      * @param string $acquirerToken
+     * @param bool $testingMode
      * @param HttpClient|null $guzzle
      */
-    public function __construct(string $acquirerToken, HttpClient $guzzle = null)
+    public function __construct(string $acquirerToken, bool $testingMode = false, HttpClient $guzzle = null)
     {
         $this->acquirerToken = $acquirerToken;
+        $this->testingMode = $testingMode;
 
         // If there were no guzzle instance provided, make the default one.
         if (is_null($guzzle)) {
