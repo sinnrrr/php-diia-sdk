@@ -155,9 +155,9 @@ trait MakesHttpRequests
     {
         try {
             $response = $this->guzzle->request($method, $uri, $payload);
-            $responseBody = $response->getBody()->getContents();
+            $responseBody = (string)$response->getBody();
 
-            return json_decode($responseBody, true);
+            return json_decode($responseBody, true) ?: $responseBody;
         } catch (GuzzleException $exception) {
             printf($exception);
             // TODO: exceptions
