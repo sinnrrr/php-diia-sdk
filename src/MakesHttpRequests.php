@@ -117,7 +117,7 @@ trait MakesHttpRequests
      * @param string $uri
      * @return array|string
      */
-    public function get(string $uri): array
+    public function get(string $uri): array|string
     {
         return $this->request('GET', $uri);
     }
@@ -127,7 +127,7 @@ trait MakesHttpRequests
      * @param array $payload
      * @return array|string
      */
-    public function post(string $uri, array $payload = []): array
+    public function post(string $uri, array $payload = []): array|string
     {
         return $this->request('POST', $uri, $payload);
     }
@@ -137,7 +137,7 @@ trait MakesHttpRequests
      * @param array $payload
      * @return array|string
      */
-    public function put(string $uri, array $payload = []): array
+    public function put(string $uri, array $payload = []): array|string
     {
         return $this->request('PUT', $uri, $payload);
     }
@@ -159,7 +159,7 @@ trait MakesHttpRequests
      * @param array $payload
      * @return array|string
      */
-    protected function request(string $method, string $uri, array $payload = []): array
+    protected function request(string $method, string $uri, array $payload = []): array|string
     {
         try {
             $response = $this->guzzle->request($method, $uri, $payload);
