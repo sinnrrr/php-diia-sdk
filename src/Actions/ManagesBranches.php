@@ -20,7 +20,7 @@ trait ManagesBranches
     {
         // [ '_id' => ... ]
         $_id = $this->post("v2/acquirers/branch", $data);
-        var_dump($data, $_id);
+        print ($_id);
 
         return new Branch($data + $_id);
     }
